@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Search from './components/Search';
 
 class NavBar extends Component{
     constructor(){
@@ -17,7 +18,11 @@ class NavBar extends Component{
                         <li><a href="/">About</a></li>
                         <li><a href="/">Contact Us</a></li>
                     </ul>
+                    <div className="right">
+                        <Search />
+                    </div>
                 </div>
+             
             </nav>
             <nav>
                 <div className="nav-wrapper green">
