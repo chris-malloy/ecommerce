@@ -14,17 +14,19 @@ class NavBar extends Component{
                         <li><a href="/">Thing 1</a></li>
                         <li><a href="/">Thing 2</a></li>
                         <li><a href="/">Thing 3</a></li>
-                        <li><a href="/">Thing 4</a></li>
+                        <li><a href="/">Thing </a></li>
                     </ul>
                 </div>
+            </nav>
+            <nav>
                 <div className="nav-wrapper green">
-                    <div className="container center">
-                        ClassicModels Logo
+                        <div className="container">
+                            ClassicModels Logo
+                        <ul className="right">
+                            <li>Sign in or Create an account</li>
+                            <li>(0) items in cart | ($0.00)</li>
+                        </ul>
                     </div>
-                    <ul className="right">
-                        <li>Sign in or Create an account</li>
-                        <li>(0) items in cart | ($0.00)</li>
-                    </ul>
                 </div>
             </nav>
         </div>
