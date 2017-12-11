@@ -7,6 +7,8 @@ class NavBar extends Component{
     render(){
         return(
         <div id="navbar">
+        <div>
+        </div>
             <nav className="light-green lighten-1" role="navigation">
                 <div className="nav-wrapper container">
                     <a id="logo-container" href="/" className="brand-logo">Ecommerce</a>
