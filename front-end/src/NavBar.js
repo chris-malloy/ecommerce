@@ -23,8 +23,8 @@ class NavBar extends Component{
                         <div className="container">
                             ClassicModels Logo
                         <ul className="right">
-                            <li>Sign in or Create an account</li>
-                            <li>(0) items in cart | ($0.00)</li>
+                            <li><a href="/">Sign in or Create an account</a></li>
+                            <li><a href="/">(0) items in cart | ($0.00)</a></li>
                         </ul>
                     </div>
                 </div>
