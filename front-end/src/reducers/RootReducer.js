@@ -1,3 +1,4 @@
+// need redux and all reducers
 import { combineReducers } from 'redux';
 import AuthReducer from './AuthReducer';
 
