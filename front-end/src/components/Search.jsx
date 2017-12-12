@@ -7,12 +7,13 @@ class Search extends Component{
                     <form action="" className="col s12">
                         <div className="row">
                             <div className="input-field col s6">
-                                <input type="text" placeholder="search for a product" className="validate" /> 
+                                <i className="material-icons prefix green-text text-darken-1">search</i>
+                                <input type="text" className="validate" id="icon_prefix" /> 
+                                <label htmlFor="icon_prefix">Search</label>
                             </div>
                             <div className="input-field col s6">
-                                <a className="waves-effect waves-light btn">button</a>
+                                <a className="waves-effect waves-light btn green darken-1">button</a>
                             </div>
-
                         </div>
                     </form>
                 </div>
