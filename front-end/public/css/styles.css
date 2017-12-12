@@ -1,5 +1,6 @@
-img {
-  width: 100%; }
+/* adjust search form height */
+#search form {
+  height: 44px; }
 
 /* label focus color */
 .input-field input:focus + label {
@@ -9,5 +10,9 @@ img {
 .row .input-field input:focus {
   border-bottom: 1px solid #43a047 !important;
   box-shadow: 0 1px 0 0 #43a047 !important; }
+
+/* GENERAL RULES */
+img {
+  width: 100%; }
 
 /*# sourceMappingURL=styles.css.map */
