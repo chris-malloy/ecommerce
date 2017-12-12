@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
+import {Link, Route} from 'react-router-dom';
+// components
 import Search from './Search';
+
 
 class NavBar extends Component{
     constructor(){
@@ -8,7 +11,7 @@ class NavBar extends Component{
     render(){
         return(
         <div id="navbar">
-            <nav className="light-green lighten-1" role="navigation">
+            <nav className="light-green lighten-1">
                 <div className="nav-wrapper container">
                     <ul id="nav-mobile" className="left hide-on-med-and-down">
                         <li><a href="/">Home</a></li>
@@ -26,7 +29,7 @@ class NavBar extends Component{
                     <div className="container">
                         <a id="logo-container" href="/" className="brand-logo">Bitty Motors</a>
                         <ul className="right">
-                            <li><a href="/">Sign in or Create an account</a></li>
+                            <li><Link to="/login">Sign in or Create an account</Link></li>
                             <li><a href="/">(0) items in cart | ($0.00)</a></li>
                         </ul>
                     </div>

@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
-// for ajax 
+// for ajax, this is promise middleware
 import reduxPromise from 'redux-promise';
 // redux store, middleware
 import { createStore, applyMiddleware } from 'redux';
