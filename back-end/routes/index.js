@@ -1,9 +1,11 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
+const mysql = require('mysql');
+const config = require('../config/config');
+const connection = mysql.createConnection(config);
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
-});
+router.post('/register',(req,res,next)=>{
+  res.json(req.body);
+})
 
 module.exports = router;

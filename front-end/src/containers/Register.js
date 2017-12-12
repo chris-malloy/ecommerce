@@ -1,4 +1,8 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+// actions
+import AuthAction from '../actions/AuthAction';
 // react-materialize
 import { Row, Input } from 'react-materialize';
 
@@ -8,24 +12,53 @@ class Register extends Component {
         this.state = {
 
         }
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
+
+    handleSubmit(e){
+        e.preventDefault();
+        const first = document.getElementById('first').value
+        const last = document.getElementById('last').value
+        const password = document.getElementById('password').value
+        const email = document.getElementById('email').value
+        this.props.authAction(first,last,password,email);
+    }
+
     render(){
+        console.log(this.props.auth);
         return(
             <div className="container" id="register">
-                <Row>
-                    <h3>Register</h3>
-                    <Input s={6} label="First Name" />
-                    <Input s={6} label="Last Name" />
-                    <Input s={12} type="password" label="password" />
-                    <Input s={12} type="email" label="Email" />
-                    <Input name='group1' type='checkbox' value='green' label='Sign up for our email list!' className='filled-in' defaultChecked='checked' />                
-                </Row>
+                <form onSubmit={this.handleSubmit}>
+                    <Row>
+                        <h3>Register</h3>
+                        <Input s={6} label="First Name" id="first" />
+                        <Input s={6} label="Last Name" id="last" />
+                        <Input s={12} type="password" label="password" id="password" />
+                        <Input s={12} type="email" label="Email" id="email" />
+                        <Input s={12} name='group1' type='checkbox' value='green' label='Sign up for our email list!' className='filled-in' defaultChecked='checked' /> 
+                        <Input s={12} type="submit" />               
+                    </Row>
+                </form>
             </div>
         )
     }
 }
 
-export default Register;
+function mapStateToProps(state) {
+    return {
+        auth: state.auth
+    }
+}
+
+function mapDispatchToProps(dispatch){
+    // dispatch is the thing that takes any aciton
+    // and sends it out to all the reducers
+    return bindActionCreators({
+        authAction: AuthAction
+    }, dispatch)
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Register);
 
 // TODO
 // figure out how to pass ifChecked bool to database

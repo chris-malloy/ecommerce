@@ -28,7 +28,7 @@ class NavBar extends Component{
                     <div className="container">
                         <a id="logo-container" href="/" className="brand-logo">Bitty Motors</a>
                         <ul className="right">
-                            <li><Link to="/login">Sign in or Create an account</Link></li>
+                            <li><Link to="/register">Sign in or Create an account</Link></li>
                             <li><a href="/">(0) items in cart | ($0.00)</a></li>
                         </ul>
                     </div>

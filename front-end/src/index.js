@@ -11,7 +11,7 @@ import RootReducer from './reducers/RootReducer';
 // provider combines redux and react
 import { Provider } from 'react-redux';
 
-const theStore = applyMiddleware(reduxPromise)(createStore)(RootReducer);
+const theStore = applyMiddleware(reduxPromise)(createStore)(RootReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
 ReactDOM.render(
     <Provider store={theStore}>
