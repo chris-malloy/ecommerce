@@ -22,12 +22,11 @@ class NavBar extends Component{
                         <Search />
                     </div>
                 </div>
-             
             </nav>
             <nav>
                 <div className="nav-wrapper green">
                         <div className="container">
-                        <a id="logo-container" href="/" className="brand-logo">Ecommerce</a>
+                        <a id="logo-container" href="/" className="brand-logo">Bitty Motors</a>
                         <ul className="right">
                             <li><a href="/">Sign in or Create an account</a></li>
                             <li><a href="/">(0) items in cart | ($0.00)</a></li>
