@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 // actions
 import AuthAction from '../actions/AuthAction';
 // react-materialize
-import { Row, Input } from 'react-materialize';
+import { Row, Input, Button } from 'react-materialize';
 
 class Register extends Component {
     constructor(){
@@ -35,8 +35,8 @@ class Register extends Component {
                         <Input s={6} label="Last Name" id="last" />
                         <Input s={12} type="password" label="password" id="password" />
                         <Input s={12} type="email" label="Email" id="email" />
-                        <Input s={12} name='group1' type='checkbox' value='green' label='Sign up for our email list!' className='filled-in' defaultChecked='checked' /> 
-                        <Input s={12} type="submit" />               
+                        <Input s={12} name='group1' type='checkbox' value='green' label='Sign up for our email list!' defaultChecked='checked' className="primary-color" /> 
+                        <Button s={12} className="btn">Register</Button>               
                     </Row>
                 </form>
             </div>

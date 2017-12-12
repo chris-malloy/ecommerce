@@ -1,5 +1,6 @@
 @import 'variables';
 @import 'search';
+@import 'register';
 
 /* GENERAL RULES */
 
@@ -7,4 +8,32 @@ body {}
 
 img {
     width: 100%;
+}
+
+
+/* label focus color */
+
+.input-field input:focus+label {
+    color: $primary-color !important;
+}
+
+
+/* label underline focus color */
+
+.row .input-field input:focus {
+    border-bottom: 1px solid $primary-color !important;
+    box-shadow: 0 1px 0 0 $primary-color !important
+}
+
+.btn {
+    background-color: $primary-color;
+}
+
+.btn:hover {
+    background-color: $hover-color;
+}
+
+.primary-color:checked+label:before {
+    border-right: 2px solid $primary-color;
+    border-bottom: 2px solid $primary-color;
 }

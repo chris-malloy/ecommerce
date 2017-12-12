@@ -4,5 +4,4 @@ export default function( state = [], action){
     } else {
         return state
     }
-    return state;
 }
