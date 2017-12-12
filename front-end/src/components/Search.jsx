@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+// materialize components
+
+
 
 class Search extends Component{
     render(){
@@ -22,3 +25,8 @@ class Search extends Component{
 }
 
 export default Search;
+
+// TODO 
+// increase search bar width
+// put icon inside of button
+// too much use of word search

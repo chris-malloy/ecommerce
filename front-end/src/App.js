@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import NavBar from './NavBar';
+import NavBar from './components/NavBar';
 import SlickSlider from './components/SlickSlider';
 
 class App extends Component {

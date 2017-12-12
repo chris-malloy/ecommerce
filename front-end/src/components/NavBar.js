@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Search from './components/Search';
+import Search from './Search';
 
 class NavBar extends Component{
     constructor(){
@@ -8,8 +8,6 @@ class NavBar extends Component{
     render(){
         return(
         <div id="navbar">
-        <div>
-        </div>
             <nav className="light-green lighten-1" role="navigation">
                 <div className="nav-wrapper container">
                     <ul id="nav-mobile" className="left hide-on-med-and-down">
@@ -25,7 +23,7 @@ class NavBar extends Component{
             </nav>
             <nav>
                 <div className="nav-wrapper green">
-                        <div className="container">
+                    <div className="container">
                         <a id="logo-container" href="/" className="brand-logo">Bitty Motors</a>
                         <ul className="right">
                             <li><a href="/">Sign in or Create an account</a></li>
