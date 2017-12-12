@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class Search extends Component{
     render(){
         return(
-                <div className="row">
+                <div id="search" className="row">
                     <form action="" className="col s12">
                         <div className="row">
                             <div className="input-field col s6">
@@ -12,7 +12,7 @@ class Search extends Component{
                                 <label htmlFor="icon_prefix">Search</label>
                             </div>
                             <div className="input-field col s6">
-                                <a className="waves-effect waves-light btn green darken-1">button</a>
+                                <a className="waves-effect waves-light btn green darken-1">Search</a>
                             </div>
                         </div>
                     </form>
