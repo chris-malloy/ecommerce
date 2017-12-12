@@ -11,8 +11,9 @@ class Register extends Component {
     }
     render(){
         return(
-            <div className="container" id="login">
+            <div className="container" id="register">
                 <Row>
+                    <h3>Register</h3>
                     <Input s={6} label="First Name" />
                     <Input s={6} label="Last Name" />
                     <Input s={12} type="password" label="password" />
