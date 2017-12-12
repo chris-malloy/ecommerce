@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 // react-materialize
 import { Row, Input } from 'react-materialize';
 
-class Login extends Component {
+class Register extends Component {
     constructor(){
         super();
         this.state = {
@@ -24,7 +24,7 @@ class Login extends Component {
     }
 }
 
-export default Login;
+export default Register;
 
 // TODO
 // figure out how to pass ifChecked bool to database
