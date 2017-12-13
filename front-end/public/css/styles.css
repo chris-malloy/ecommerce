@@ -6,7 +6,7 @@
   margin-top: 30px;
   margin-left: 11.250px; }
 
-#register p {
+#register a {
   margin-left: 11.250px; }
 
 /* GENERAL RULES */
@@ -23,7 +23,8 @@ img {
   box-shadow: 0 1px 0 0 #43a047 !important; }
 
 /* button color */
-.btn {
+.btn,
+.btn:focus {
   background-color: #43a047; }
 
 /* button hover color */

@@ -6,7 +6,7 @@ import AuthReducer from './AuthReducer';
 // that arg has key:value pair = stateName: reducerFunction
 // the reducerFunction wil return a value
 const rootReducer = combineReducers({
-    auth: AuthReducer
+    auth: AuthReducer,
 })
 
 // export result of combineReducers
