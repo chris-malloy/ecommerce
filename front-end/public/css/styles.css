@@ -6,6 +6,9 @@
   margin-top: 30px;
   margin-left: 11.250px; }
 
+#register p {
+  margin-left: 11.250px; }
+
 /* GENERAL RULES */
 img {
   width: 100%; }
@@ -19,12 +22,15 @@ img {
   border-bottom: 1px solid #43a047 !important;
   box-shadow: 0 1px 0 0 #43a047 !important; }
 
+/* button color */
 .btn {
   background-color: #43a047; }
 
+/* button hover color */
 .btn:hover {
   background-color: #2e7d32; }
 
+/* checkbox color */
 .primary-color:checked + label:before {
   border-right: 2px solid #43a047;
   border-bottom: 2px solid #43a047; }

@@ -33,10 +33,11 @@ class Register extends Component {
                         <h3>Register</h3>
                         <Input s={6} label="First Name" id="first" />
                         <Input s={6} label="Last Name" id="last" />
-                        <Input s={12} type="password" label="password" id="password" />
                         <Input s={12} type="email" label="Email" id="email" />
+                        <Input s={12} type="password" label="password" id="password" />
                         <Input s={12} name='group1' type='checkbox' value='green' label='Sign up for our email list!' defaultChecked='checked' className="primary-color" /> 
-                        <Button s={12} className="btn">Register</Button>               
+                        <Button s={12} className="btn">Register</Button>
+                        <a href="/login"><p>Already have an account? Click here.</p></a>               
                     </Row>
                 </form>
             </div>

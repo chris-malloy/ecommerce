@@ -13,8 +13,8 @@ class Login extends Component {
             <div className="container" id="login">
                 <Row>
                     <h3>Login</h3>
-                    <Input s={12} type="password" label="password"/>
                     <Input s={12} type="email" label="Email"/>
+                    <Input s={12} type="password" label="password"/>
                 </Row>
             </div>
         )
