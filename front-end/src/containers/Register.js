@@ -10,20 +10,44 @@ class Register extends Component {
     constructor(){
         super();
         this.state = {
-
+            error: "",
         }
         this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    componentWillReceiveProps(newProps){
+        console.log(this.props);
+        console.log(newProps);
+        if(newProps.auth.msg === "registerSuccess"){
+            this.props.history.push('/');
+        } else if(newProps.auth.msg === "userExists"){
+            this.setState({
+                error: "This email address is already registered. Please use a different one.",
+            })
+        }
     }
 
     handleSubmit(e){
         e.preventDefault();
         var formData = {
-            first: e.target[0].value,
-            last: e.target[1].value,
-            email: e.target[2].value,
-            password: e.target[3].value,
+            firstName: e.target[0].value,
+            lastName: e.target[1].value,
+            userName: e.target[2].value,
+            phoneNumber: e.target[3].value,
+            email: e.target[4].value,
+            addressLine1: e.target[5].value,
+            addressLine2: e.target[6].value,
+            city: e.target[7].value,
+            state: e.target[8].value,
+            zipCode: e.target[9].value,
+            country: e.target[10].value,
+            password: e.target[11].value,
         }
-        console.log(formData);
+        if(formData.name === ""){
+            this.setState({
+                error: "Name field cannot be empty.",
+            })
+        }
         this.props.authAction(formData);
     }
 
@@ -31,15 +55,19 @@ class Register extends Component {
         console.log(this.props.auth);
         return(
             <div className="container" id="register">
+                <h1>{this.state.error}</h1>
                 <form onSubmit={this.handleSubmit}>
                     <Row>
                         <h3>Register</h3>
-                        <Input s={6} label="First Name" id="first" />
-                        <Input s={6} label="Last Name" id="last" />
-                        <Input s={12} type="email" label="Email" id="email" />
-                        <Input s={6} type="" label="Address Line 1" /> 
-                        <Input s={6} type="" label="Address Line 2" />
-                        <Input s={6} type="select" label="State" defaultValue="1">
+                        <Input s={6} label="First Name" />
+                        <Input s={6} label="Last Name" />
+                        <Input s={6} label="User Name" />
+                        <Input s={6} label="Phone Number" />
+                        <Input s={12} type="email" label="Email" />
+                        <Input s={6} label="Address Line 1" />
+                        <Input s={6} label="Address Line 2" />
+                        <Input s={3} type="" label="city" /> 
+                        <Input s={3} type="select" label="State" defaultValue="1">
                            <option value="AL">Alabama</option>
                             <option value="AK">Alaska</option>
                             <option value="AZ">Arizona</option>
@@ -92,9 +120,9 @@ class Register extends Component {
                             <option value="WI">Wisconsin</option>
                             <option value="WY">Wyoming</option>
                         </Input>
-                        <Input s={6} label="ZipCode" />
-                        <Input s={12} type="phone" label="Phone Number" />
-                        <Input s={12} type="password" label="password" id="password" />
+                        <Input s={3} label="Zip Code" />
+                        <Input s={3} label="Country" />
+                        <Input s={12} type="password" label="password" />
                         <Input s={12} name='group1' type='checkbox' value='green' label='Sign up for our email list!' defaultChecked='checked' className="primary-color" /> 
                         <Button s={12} className="btn">Register</Button>
                         <p><a href="/login">Already have an account? Click here.</a></p>               
@@ -125,3 +153,5 @@ export default connect(mapStateToProps, mapDispatchToProps)(Register);
 // TODO
 // figure out how to pass ifChecked bool to database
 // add location fields to form
+// add countries to country dropdown
+// add error messages
