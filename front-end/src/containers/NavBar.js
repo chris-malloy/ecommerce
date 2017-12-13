@@ -2,12 +2,35 @@ import React, { Component } from 'react';
 import { Link, Route } from 'react-router-dom';
 // components
 import Search from '../components/Search';
+import { connect } from 'react-redux';
+
 
 class NavBar extends Component{
     constructor(){
         super();
     }
+
+    componentWillReceiveProps(newProps){
+
+    }
+
     render(){
+        if(this.props.auth.name !== undefined){
+            // user is logged in
+            var rightMenuBar = [
+                <li key={1}>Welcome, {this.props.auth.name}</li>,
+                <li key={2}><Link to="/cart">(0) items in cart | ($0.00)</Link></li>,
+                <li key={2}><Link to="/loggout">Logout</Link></li>,
+            ]
+        } else {
+            var rightMenuBar = [
+            <li key={1}><Link to="/login">Sign in</Link></li>,
+            <li key={2}>|</li>,
+            <li key={3}><Link to="/register">Create an Account</Link></li>,
+            <li key={4}><a href="/">(0) items in cart | ($0.00)</a></li>,
+            ]
+        }
+        console.log(this.props.auth);
         return(
         <div id="navbar">
             <nav className="light-green lighten-1">
@@ -28,10 +51,7 @@ class NavBar extends Component{
                     <div className="container">
                         <a id="logo-container" href="/" className="brand-logo">Bitty Motors</a>
                         <ul className="right">
-                            <li><Link to="/login">Sign in</Link></li>
-                            <li>|</li>
-                            <li><Link to="/register">Create an Account</Link></li>
-                            <li><a href="/">(0) items in cart | ($0.00)</a></li>
+                            {rightMenuBar}
                         </ul>
                     </div>
                 </div>
@@ -41,6 +61,12 @@ class NavBar extends Component{
     }
 }
 
-export default NavBar;
+function mapStateToProps(state){
+    return{
+        auth:state.auth,
+    }
+}
+
+export default connect(mapStateToProps)(NavBar);
 
 // TODO 
