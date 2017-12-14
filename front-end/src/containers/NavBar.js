@@ -56,7 +56,7 @@ class NavBar extends Component{
                             <ul id="nav-mobile" className="left hide-on-med-and-down">
                                 <li><Link to="/">Home</Link></li>
                                 <li className="dropdown">
-                                    <Link to="/shop">Shop</Link>
+                                    <Link to="/shop/productLines">Shop</Link>
                                     <ul>
                                         <li className="dropdown-links">
                                             {shopMenu}

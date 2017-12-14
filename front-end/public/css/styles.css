@@ -27,7 +27,8 @@ nav.nav-extended .nav-content {
   .dropdown .dropdown-links {
     display: none; }
   .dropdown:hover .dropdown-links {
-    display: block; }
+    display: block;
+    background-color: red; }
   .dropdown a {
     display: block; }
 
