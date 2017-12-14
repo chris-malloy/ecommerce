@@ -16,6 +16,7 @@ router.post('/login', (req, res, next) => {
 		INNER JOIN customers ON users.cid = customers.customerNumber
 		WHERE users.email = ?`;
     connection.query(checkLoginQuery, [email], (error, results) => {
+        console.log(results)
         if (error) {
             throw error; // dev only
         }
@@ -27,6 +28,7 @@ router.post('/login', (req, res, next) => {
         } else {
             // email valid, check for password
             const checkHash = bcrypt.compareSync(password, results[0].password)
+            console.log(checkHash, password)
             const name = results[0].customerName;
             if (checkHash) {
                 const newToken = randToken.uid(60);
@@ -35,6 +37,7 @@ router.post('/login', (req, res, next) => {
                 const updateToken = `UPDATE users SET token = ?
 					WHERE email = ?;`;
                 connection.query(updateToken, [newToken, email], (error, results) => {
+                    console.log(results);
                     if (error) {
                         throw error; // dev only
                     } else {
@@ -104,6 +107,7 @@ router.post('/register', (req, res, next) => {
                 // user token for db
                 const token = randToken.uid(60);
                 const hash = bcrypt.hashSync(userData.password);
+                console.log(userData.password);
                 const insertUsers = `INSERT INTO USERS
 		(cid,type,password,token,email)
 			VALUES
@@ -130,11 +134,16 @@ router.post('/register', (req, res, next) => {
     )
 })
 
-router.get('/productLines/get') {
-    res.json({
-        msg: "getProductLines"
+router.get('/productLines/get', (req, res, next) => {
+    const selectQuery = `SELECT * FROM productlines;`;
+    connection.query(selectQuery, (error, results) => {
+        if (error) {
+            throw error;
+        } else {
+            res.json(results);
+        }
     })
-}
+})
 
 module.exports = router;
 

@@ -6,6 +6,7 @@ import { bindActionCreators } from 'redux';
 import Search from '../components/Search';
 // actions
 import GetProductLines from '../actions/GetProductLines';
+// react-materialize
 
 
 
@@ -23,13 +24,13 @@ class NavBar extends Component{
     }
 
     render(){
-        // console.log(this.props.auth);
-        if(this.props.auth.firstName !== undefined){
+        console.log(this.props.auth);
+        if(this.props.auth.userName !== undefined){
             // user is logged in
             var rightMenuBar = [
                 <li key={1}>Welcome, {this.props.auth.userName}</li>,
                 <li key={2}><Link to="/cart">(0) items in cart | ($0.00)</Link></li>,
-                <li key={3}><Link to="/logout">Logout</Link></li>,
+                <li key={3}><a href="/">Logout</a></li>,
             ]
         } else {
             rightMenuBar = [
@@ -40,33 +41,36 @@ class NavBar extends Component{
             ]
         }
         // console.log(this.props.auth);
-        console.log(this.props.getProductLines)
+        console.log(this.props.pl)
+        var shopMenu = this.props.pl.map((pl,index)=>{
+            return(<Link key={index} to={`show/${pl.link}`}>{pl.productLine}</Link>)
+        })
         return(
-        <div id="navbar">
-            <nav className="light-green lighten-1">
-                <div className="nav-wrapper container">
-                    <ul id="nav-mobile" className="left hide-on-med-and-down">
-                        <li><a href="/">Home</a></li>
-                        <li><a href="/productLines/get">Shop</a></li>
-                        <li><a href="/">About</a></li>
-                        <li><a href="/">Contact Us</a></li>
-                    </ul>
-                    <div className="right">
-                        <Search />
-                    </div>
-                </div>
-            </nav>
-            <nav>
-                <div className="nav-wrapper green">
-                    <div className="container">
-                        <a id="logo-container" href="/" className="brand-logo">Bitty Motors</a>
-                        <ul className="right">
-                            {rightMenuBar}
+            <div id="navbar">
+                <nav className="light-green lighten-1">
+                    <div className="nav-wrapper container">
+                        <ul id="nav-mobile" className="left hide-on-med-and-down">
+                            <li><a href="/">Home</a></li>
+                            <li><a href="/productLines/get">Shop</a></li>
+                            <li><a href="/">About</a></li>
+                            <li><a href="/">Contact Us</a></li>
                         </ul>
+                        <div className="right">
+                            <Search />
+                        </div>
                     </div>
-                </div>
-            </nav>
-        </div>
+                </nav>
+                <nav>
+                    <div className="nav-wrapper green">
+                        <div className="container">
+                            <a id="logo-container" href="/" className="brand-logo">Bitty Motors</a>
+                            <ul className="right">
+                                {rightMenuBar}
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+            </div>
         )
     }
 }
@@ -87,3 +91,5 @@ function mapDispatchToProps(dispatch){
 export default connect(mapStateToProps, mapDispatchToProps)(NavBar);
 
 // TODO 
+// make a redux action to log out, remove token
+// turn shop into dropdown menu

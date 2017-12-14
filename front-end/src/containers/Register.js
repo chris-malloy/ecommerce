@@ -29,6 +29,7 @@ class Register extends Component {
 
     handleSubmit(e){
         e.preventDefault();
+        console.dir(e.target)
         var formData = {
             firstName: e.target[0].value,
             lastName: e.target[1].value,
@@ -39,10 +40,11 @@ class Register extends Component {
             addressLine2: e.target[6].value,
             city: e.target[7].value,
             state: e.target[8].value,
-            zipCode: e.target[9].value,
-            country: e.target[10].value,
-            password: e.target[11].value,
+            zipCode: e.target[10].value,
+            country: e.target[11].value,
+            password: e.target[12].value,
         }
+        console.log(formData)
         if(formData.name === ""){
             this.setState({
                 error: "Name field cannot be empty.",
