@@ -10,7 +10,8 @@ class Login extends Component {
     constructor() {
         super();
         this.state = {
-            error: "",
+            msgEmail: "Email",
+            msgPassword: "Password",
         }
         this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -27,10 +28,12 @@ class Login extends Component {
         }
         // validation
         if(formData.email.length === 0){
-
+            this.setState({
+                msgEmail: "Email field cannot be empty.",
+            })
         } else if(formData.password.length === 0){
             this.setState({
-                error: "Password field cannot be empty.",
+                msgPassword: "Password field cannot be empty.",
             })
         } else{
             this.props.loginAction(formData);
@@ -42,8 +45,8 @@ class Login extends Component {
                 <form onSubmit={this.handleSubmit}>
                     <Row>
                         <h3>Login</h3>
-                        <Input s={12} type="email" label="Email"/>
-                        <Input s={12} type="password" label="password"/>
+                        <Input s={12} type="email" label={this.state.msgEmail} />
+                        <Input s={12} type="password" label={this.state.msgPassword} />
                         <Button s={12} className="btn">Login</Button>
                     </Row>
                 </form>

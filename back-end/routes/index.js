@@ -20,7 +20,7 @@ router.post('/login', (req, res, next) => {
         // check for email
         if (results.length === 0) {
             res.json({
-                msg: "user does not exist",
+                msg: "Email not found.",
             })
         } else {
             // email valid, check for password
@@ -32,6 +32,7 @@ router.post('/login', (req, res, next) => {
             }
         }
     })
+    res.json(req.body);
 })
 
 // post route for user registration
@@ -112,4 +113,4 @@ router.post('/register', (req, res, next) => {
 module.exports = router;
 
 // TODO
-// Add other data points to insertIntoCust query,
+// Add other data points to insertIntoCust query
