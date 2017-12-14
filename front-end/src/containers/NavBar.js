@@ -44,10 +44,10 @@ class NavBar extends Component{
         // console.log(this.props.auth);
         var shopMenu = this.props.pl.map((pl,index)=>{
             const safeLink = encodeURIComponent(pl.productLine);
-            console.log(safeLink);
+            // console.log(safeLink);
             return(<Link key={index} to={`/shop/${safeLink}`}>{pl.productLine}</Link>)
         })
-        console.log(shopMenu)
+        // console.log(shopMenu)
         return(
             <div id="navbar">
                 <Row>
