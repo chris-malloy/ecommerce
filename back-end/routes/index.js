@@ -43,7 +43,7 @@ router.post('/login', (req, res, next) => {
                     } else {
                         res.json({
                             msg: "loginSuccess",
-                            token: results[0].token,
+                            token: newToken,
                             userName: name,
                         })
                     }
@@ -143,7 +143,7 @@ router.get('/productLines/get', (req, res, next) => {
             res.json(results);
         }
     })
-})
+});
 
 module.exports = router;
 

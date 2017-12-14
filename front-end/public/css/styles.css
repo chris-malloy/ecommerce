@@ -16,6 +16,21 @@
 #login a {
   margin-left: 11.250px; }
 
+nav ul a {
+  display: inline-block; }
+
+nav.nav-extended .nav-content {
+  position: inherit; }
+
+.dropdown {
+  position: relative; }
+  .dropdown .dropdown-links {
+    display: none; }
+  .dropdown:hover .dropdown-links {
+    display: block; }
+  .dropdown a {
+    display: block; }
+
 /* GENERAL RULES */
 img {
   width: 100%; }

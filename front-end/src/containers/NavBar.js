@@ -7,6 +7,7 @@ import Search from '../components/Search';
 // actions
 import GetProductLines from '../actions/GetProductLines';
 // react-materialize
+import { Input, Row } from 'react-materialize'
 
 
 
@@ -41,35 +42,46 @@ class NavBar extends Component{
             ]
         }
         // console.log(this.props.auth);
-        console.log(this.props.pl)
         var shopMenu = this.props.pl.map((pl,index)=>{
-            return(<Link key={index} to={`show/${pl.link}`}>{pl.productLine}</Link>)
+            const safeLink = encodeURIComponent(pl.productLine);
+            console.log(safeLink);
+            return(<Link key={index} to={`/shop/${safeLink}`}>{pl.productLine}</Link>)
         })
+        console.log(shopMenu)
         return(
             <div id="navbar">
-                <nav className="light-green lighten-1">
-                    <div className="nav-wrapper container">
-                        <ul id="nav-mobile" className="left hide-on-med-and-down">
-                            <li><a href="/">Home</a></li>
-                            <li><a href="/productLines/get">Shop</a></li>
-                            <li><a href="/">About</a></li>
-                            <li><a href="/">Contact Us</a></li>
-                        </ul>
-                        <div className="right">
-                            <Search />
-                        </div>
-                    </div>
-                </nav>
-                <nav>
-                    <div className="nav-wrapper green">
-                        <div className="container">
-                            <a id="logo-container" href="/" className="brand-logo">Bitty Motors</a>
-                            <ul className="right">
-                                {rightMenuBar}
+                <Row>
+                    <nav className="light-green lighten-1">
+                        <div className="nav-wrapper container">
+                            <ul id="nav-mobile" className="left hide-on-med-and-down">
+                                <li><Link to="/">Home</Link></li>
+                                <li className="dropdown">
+                                    <Link to="/shop">Shop</Link>
+                                    <ul>
+                                        <li className="dropdown-links">
+                                            {shopMenu}
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li><Link to="/">About</Link></li>
+                                <li><Link to="/">Contact Us</Link></li>
                             </ul>
+                            <div className="right">
+                                <Search />
+                            </div>
                         </div>
-                    </div>
-                </nav>
+                    </nav>
+                    <nav>
+                        <div className="nav-wrapper green">
+                            <div className="container">
+                                <a id="logo-container" href="/" className="brand-logo">Bitty Motors</a>
+                                <ul className="right">
+                                    {rightMenuBar}
+                                </ul>
+                            </div>
+                        </div>
+                    </nav>
+                </Row>
             </div>
         )
     }
