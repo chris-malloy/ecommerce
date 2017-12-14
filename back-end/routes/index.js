@@ -36,7 +36,7 @@ router.post('/register', (req, res, next) => {
             const queryValues = [
                     userData.userName,
                     userData.lastName,
-                    userData.firstname,
+                    userData.firstName,
                     userData.addressLine1,
                     userData.addressLine2,
                     userData.city,
@@ -67,7 +67,7 @@ router.post('/register', (req, res, next) => {
                     } else {
                         res.json({
                             token: token,
-                            name: userData.fullName,
+                            firstName: userData.firstName,
                             msg: "registerSuccess",
                         })
                     }
