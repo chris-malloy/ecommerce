@@ -9,6 +9,13 @@
 #register a {
   margin-left: 11.250px; }
 
+#login button {
+  margin-top: 30px;
+  margin-left: 11.250px; }
+
+#login a {
+  margin-left: 11.250px; }
+
 /* GENERAL RULES */
 img {
   width: 100%; }

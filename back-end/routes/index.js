@@ -7,6 +7,33 @@ connection.connect();
 var bcrypt = require('bcrypt-nodejs');
 var randToken = require('rand-token');
 
+// post route for user login 
+router.post('/login', (req, res, next) => {
+    console.log(req.body);
+    const email = req.body.email;
+    const password = req.body.password;
+    const checkLoginQuery = `SELECT * FROM users WHERE email = ?`;
+    connection.query(checkLoginQuery, [email], (error, results) => {
+        if (error) {
+            throw error; // dev only
+        }
+        // check for email
+        if (results.length === 0) {
+            res.json({
+                msg: "user does not exist",
+            })
+        } else {
+            // email valid, check for password
+            const checkHash = bcrypt.compareSync(password, results[0].password)
+            if (checkHash) {
+
+            } else {
+
+            }
+        }
+    })
+})
+
 // post route for user registration
 router.post('/register', (req, res, next) => {
     const userData = req.body;
@@ -30,9 +57,9 @@ router.post('/register', (req, res, next) => {
         () => {
             console.log("User is not in the db.")
             const insertIntoCust = `INSERT INTO customers
-            (customerName, contactLastName, contactFirstName, addressLine1, addressLine2, city, state, postalCode, country, salesRepEmployeeNumber, creditLimit)
-                VALUES
-			(?,?,?,?,?,?,?,?,?,?,?)`;
+	(customerName, contactLastName, contactFirstName, addressLine1, addressLine2, city, state, postalCode, country, salesRepEmployeeNumber, creditLimit)
+		VALUES
+	(?,?,?,?,?,?,?,?,?,?,?)`;
             const queryValues = [
                     userData.userName,
                     userData.lastName,
@@ -57,9 +84,9 @@ router.post('/register', (req, res, next) => {
                 const token = randToken.uid(60);
                 const hash = bcrypt.hashSync(userData.password);
                 const insertUsers = `INSERT INTO USERS
-				(cid,type,password,token,email)
-					VALUES
-				(?,?,?,?,?);`;
+		(cid,type,password,token,email)
+			VALUES
+		(?,?,?,?,?);`;
                 // insert users query
                 connection.query(insertUsers, [newID, 'customer', hash, token, userData.email], (error, results) => {
                     if (error) {

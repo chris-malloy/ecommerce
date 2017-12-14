@@ -155,3 +155,4 @@ export default connect(mapStateToProps, mapDispatchToProps)(Register);
 // add location fields to form
 // add countries to country dropdown
 // add error messages
+// control form submission for required fields ie password
