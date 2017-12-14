@@ -59,15 +59,15 @@ class Register extends Component {
                 <form onSubmit={this.handleSubmit}>
                     <Row>
                         <h3>Register</h3>
-                        <Input s={6} label="First Name" />
-                        <Input s={6} label="Last Name" />
-                        <Input s={6} label="User Name" />
+                        <Input s={6} label="* First Name" />
+                        <Input s={6} label="* Last Name" />
+                        <Input s={6} label="* User Name" />
                         <Input s={6} label="Phone Number" />
-                        <Input s={12} type="email" label="Email" />
-                        <Input s={6} label="Address Line 1" />
+                        <Input s={12} type="email" label="* Email" />
+                        <Input s={6} label="* Address Line 1" />
                         <Input s={6} label="Address Line 2" />
-                        <Input s={3} type="" label="city" /> 
-                        <Input s={3} type="select" label="State" defaultValue="1">
+                        <Input s={3} type="" label="* city" /> 
+                        <Input s={3} type="select" label="* State" defaultValue="GA">
                            <option value="AL">Alabama</option>
                             <option value="AK">Alaska</option>
                             <option value="AZ">Arizona</option>
@@ -120,9 +120,10 @@ class Register extends Component {
                             <option value="WI">Wisconsin</option>
                             <option value="WY">Wyoming</option>
                         </Input>
-                        <Input s={3} label="Zip Code" />
-                        <Input s={3} label="Country" />
-                        <Input s={12} type="password" label="password" />
+                        <Input s={3} label="* Zip Code" />
+                        <Input s={3} label="* Country" />
+                        <Input s={12} type="password" label="* password" />
+                        <p>* field required</p>
                         <Input s={12} name='group1' type='checkbox' value='green' label='Sign up for our email list!' defaultChecked='checked' className="primary-color" /> 
                         <Button s={12} className="btn">Register</Button>
                         <p><a href="/login">Already have an account? Click here.</a></p>               
@@ -156,3 +157,4 @@ export default connect(mapStateToProps, mapDispatchToProps)(Register);
 // add countries to country dropdown
 // add error messages
 // control form submission for required fields ie password
+// use state object to create Label msgs for each field

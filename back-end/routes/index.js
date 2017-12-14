@@ -12,7 +12,9 @@ router.post('/login', (req, res, next) => {
     console.log(req.body);
     const email = req.body.email;
     const password = req.body.password;
-    const checkLoginQuery = `SELECT * FROM users WHERE email = ?`;
+    const checkLoginQuery = `SELECT * FROM users 
+		INNER JOIN customers ON users.cid = customers.customerNumber
+		WHERE users.email = ?`;
     connection.query(checkLoginQuery, [email], (error, results) => {
         if (error) {
             throw error; // dev only
@@ -25,14 +27,32 @@ router.post('/login', (req, res, next) => {
         } else {
             // email valid, check for password
             const checkHash = bcrypt.compareSync(password, results[0].password)
+            const name = results[0].customerName;
             if (checkHash) {
-
+                const newToken = randToken.uid(60);
+                // query to add later for token experiation comparison
+                // , token_exp=DATE_ADD(NOW(), INTERVAL 1 HOUR;
+                const updateToken = `UPDATE users SET token = ?
+					WHERE email = ?;`;
+                connection.query(updateToken, [newToken, email], (error, results) => {
+                    if (error) {
+                        throw error; // dev only
+                    } else {
+                        res.json({
+                            msg: "loginSuccess",
+                            token: results[0].token,
+                            userName: name,
+                        })
+                    }
+                })
             } else {
-
+                // incorrect password
+                res.json({
+                    msg: "wrongPassword",
+                })
             }
         }
     })
-    res.json(req.body);
 })
 
 // post route for user registration
@@ -95,7 +115,7 @@ router.post('/register', (req, res, next) => {
                     } else {
                         res.json({
                             token: token,
-                            firstName: userData.firstName,
+                            userName: userData.userName,
                             msg: "registerSuccess",
                         })
                     }

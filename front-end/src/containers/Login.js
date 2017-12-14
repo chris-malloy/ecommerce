@@ -17,7 +17,17 @@ class Login extends Component {
     }
 
     componentWillReceiveProps(newProps){
-
+        if(newProps.auth.msg === "wrongPassword"){
+            this.setState({
+                error: "This password does not match.",
+            })
+        } else if(newProps.auth.msg === "badUser"){
+            this.setState({
+                error: "Email not found.",
+            })
+        } else if(newProps.auth.msg === "loginSuccess"){
+            newProps.history.push('/')
+        }
     }
 
     handleSubmit(e){
@@ -40,6 +50,7 @@ class Login extends Component {
         }
     }
     render() {
+        console.log(this.props.auth);   
         return (
             <div className="container" id="login">
                 <form onSubmit={this.handleSubmit}>
@@ -48,6 +59,7 @@ class Login extends Component {
                         <Input s={12} type="email" label={this.state.msgEmail} />
                         <Input s={12} type="password" label={this.state.msgPassword} />
                         <Button s={12} className="btn">Login</Button>
+                        <p><a href="/register">Don't have an account? Click here.</a></p>
                     </Row>
                 </form>
             </div>

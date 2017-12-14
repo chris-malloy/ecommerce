@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link, Route } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 // components
 import Search from '../components/Search';
 import { connect } from 'react-redux';
@@ -19,12 +19,12 @@ class NavBar extends Component{
         if(this.props.auth.firstName !== undefined){
             // user is logged in
             var rightMenuBar = [
-                <li key={1}>Welcome, {this.props.auth.firstName}</li>,
+                <li key={1}>Welcome, {this.props.auth.userName}</li>,
                 <li key={2}><Link to="/cart">(0) items in cart | ($0.00)</Link></li>,
                 <li key={3}><Link to="/loggout">Logout</Link></li>,
             ]
         } else {
-            var rightMenuBar = [
+            rightMenuBar = [
             <li key={1}><Link to="/login">Sign in</Link></li>,
             <li key={2}>|</li>,
             <li key={3}><Link to="/register">Create an Account</Link></li>,
