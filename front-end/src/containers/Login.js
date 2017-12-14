@@ -46,7 +46,7 @@ class Login extends Component {
                 msgPassword: "Password field cannot be empty.",
             })
         } else{
-            this.props.loginAction(formData);
+            this.props.loginAction(formData)
         }
     }
     render() {

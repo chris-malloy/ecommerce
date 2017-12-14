@@ -130,6 +130,12 @@ router.post('/register', (req, res, next) => {
     )
 })
 
+router.get('/productLines/get') {
+    res.json({
+        msg: "getProductLines"
+    })
+}
+
 module.exports = router;
 
 // TODO
