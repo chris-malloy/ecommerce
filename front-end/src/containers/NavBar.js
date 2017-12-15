@@ -7,14 +7,14 @@ import Search from '../components/Search';
 // actions
 import GetProductLines from '../actions/GetProductLines';
 // react-materialize
-import { Input, Row } from 'react-materialize'
+import { Row } from 'react-materialize'
 
 
 
 class NavBar extends Component{
-    constructor(){
-        super();
-    }
+    // constructor(){
+    //     super();
+    // }
 
     componentDidMount(){
         this.props.getProductLines();
@@ -25,7 +25,7 @@ class NavBar extends Component{
     }
 
     render(){
-        console.log(this.props.auth);
+        // console.log(this.props.auth);
         if(this.props.auth.userName !== undefined){
             // user is logged in
             var rightMenuBar = [

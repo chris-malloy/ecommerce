@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import axios from 'axios';
 import ProductRow from '../components/ProductRow';
+import UpdateCart from '../actions/UpdateCart';
+
+
 
 class ProductLines extends Component{
     constructor(){
@@ -15,7 +19,7 @@ class ProductLines extends Component{
     getProducts(props){
         const pl = this.props.match.params.productLines
         const url = `${window.apiHost}/productLines/${pl}/get`;
-        console.log(url);
+        // console.log(url);
         axios.get(url)
         .then((response) => {
             this.setState({
@@ -31,27 +35,30 @@ class ProductLines extends Component{
     componentWillReceiveProps(nextProps){
         this.getProducts(nextProps);
     }
+
     render(props){
         // console.log(this.props);
-        console.log(this.props.pl)
-        console.log(this.state.productList);
+        // console.log(this.props.pl)
+        // console.log(this.state.productList);
         const products = this.state.productList.map((product,index)=>{
             return(
                 <ProductRow 
-                        key={index}
-                        product={product}
+                    key={index}
+                    product={product}
+                    addToCart={this.props.updateCart}
+                    token={this.props.auth.token}
                 />
             )
         })
         var thisPL = this.props.pl.filter((obj)=>{
-            console.log(obj.productLine);
-            console.log(this.props.match.params.productLine)
-            return obj.productLine == this.props.match.params.productLines
+            // console.log(obj.productLine);
+            // console.log(this.props.match.params.productLine)
+            return obj.productLine === this.props.match.params.productLines
         })
         if(thisPL.length === 0){
             var desc = ""
         } else {
-            var desc = thisPL[0].textDescription
+            desc = thisPL[0].textDescription
         }
         // console.log(thisPL[0])
         return(
@@ -83,8 +90,15 @@ class ProductLines extends Component{
 
 function mapStateToProps(state){
     return{
-        pl:state.pl
+        pl:state.pl,
+        auth: state.auth
     }
 }
 
-export default connect(mapStateToProps)(ProductLines);
+function mapDispatchToProps(dispatch){
+    return bindActionCreators({
+        updateCart: UpdateCart
+    },dispatch)
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(ProductLines);

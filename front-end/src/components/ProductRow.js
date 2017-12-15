@@ -1,16 +1,28 @@
 import React from 'react';
 
 function ProductRow(props){
+    // test to see if token exists (user logged in)
+    // console.log(props.token)
+    if(props.token === undefined){
+        var button = "";
+    } else {
+        button = <button
+                    className="btn"
+                    onClick={()=>{
+                        props.addToCart(props.token,product.productCode)
+                    }}
+                >Add</button>
+    }
     const product = props.product
     if(product.quantityInStock > 100){
         var inStockClass = "";
         var inStock = "In Stock!"
     } else if(product.quantityInStock > 0){
-        var inStockClass = "yellow";
-        var inStock = "Order Soon!";
+        inStockClass = "yellow";
+        inStock = "Order Soon!";
     } else {
-        var inStockClass = "red";
-        var inStock = 'Out of stock'
+        inStockClass = "red";
+        inStock = 'Out of stock'
     }
     return(
         <tr>
@@ -21,6 +33,7 @@ function ProductRow(props){
             <td className={inStockClass}>{inStock}</td>
             <td>{product.buyPrice}</td>
             <td>{product.MSRP}</td>
+            <td>{button}</td>
         </tr>
     )
 };
