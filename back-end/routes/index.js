@@ -9,14 +9,14 @@ var randToken = require('rand-token');
 
 // post route for user login 
 router.post('/login', (req, res, next) => {
-    console.log(req.body);
+    // console.log(req.body);
     const email = req.body.email;
     const password = req.body.password;
     const checkLoginQuery = `SELECT * FROM users 
 		INNER JOIN customers ON users.cid = customers.customerNumber
 		WHERE users.email = ?`;
     connection.query(checkLoginQuery, [email], (error, results) => {
-        console.log(results)
+        // console.log(results)
         if (error) {
             throw error; // dev only
         }
@@ -28,7 +28,7 @@ router.post('/login', (req, res, next) => {
         } else {
             // email valid, check for password
             const checkHash = bcrypt.compareSync(password, results[0].password)
-            console.log(checkHash, password)
+            // console.log(checkHash, password)
             const name = results[0].customerName;
             if (checkHash) {
                 const newToken = randToken.uid(60);
@@ -37,7 +37,7 @@ router.post('/login', (req, res, next) => {
                 const updateToken = `UPDATE users SET token = ?
 					WHERE email = ?;`;
                 connection.query(updateToken, [newToken, email], (error, results) => {
-                    console.log(results);
+                    // console.log(results);
                     if (error) {
                         throw error; // dev only
                     } else {
@@ -61,7 +61,7 @@ router.post('/login', (req, res, next) => {
 // post route for user registration
 router.post('/register', (req, res, next) => {
     const userData = req.body;
-    console.log(userData)
+    // console.log(userData)
     const checkEmail = new Promise((resolve, reject) => {
         const checkEmailQuery = `SELECT * FROM users WHERE email = ?;`;
         connection.query(checkEmailQuery, [userData.email], (error, results) => {
@@ -79,7 +79,7 @@ router.post('/register', (req, res, next) => {
     })
     checkEmail.then(
         () => {
-            console.log("User is not in the db.")
+            // console.log("User is not in the db.")
             const insertIntoCust = `INSERT INTO customers
 	(customerName, contactLastName, contactFirstName, addressLine1, addressLine2, city, state, postalCode, country, salesRepEmployeeNumber, creditLimit)
 		VALUES
@@ -107,7 +107,7 @@ router.post('/register', (req, res, next) => {
                 // user token for db
                 const token = randToken.uid(60);
                 const hash = bcrypt.hashSync(userData.password);
-                console.log(userData.password);
+                // console.log(userData.password);
                 const insertUsers = `INSERT INTO USERS
 		(cid,type,password,token,email)
 			VALUES
@@ -128,7 +128,7 @@ router.post('/register', (req, res, next) => {
         }
     ).catch(
         (error) => {
-            console.log(error);
+            // console.log(error);
             res.json(error);
         }
     )
@@ -157,7 +157,46 @@ router.get('/productLines/:productLine/get', (req, res, next) => {
             res.json(results);
         }
     })
+})
 
+router.post('/updateCart', (req, res, next)=>{
+    console.log("update cart hit")
+    const productCode = req.body.productCode;
+    const userToken = req.body.userToken;
+    const getUidQuery = `SELECT id from users WHERE token = ?;`;
+    connection.query(getUidQuery,[userToken],(error,results)=>{
+        if(error){
+            throw error; //dev only
+        } else if(results.length === 0){
+            // user not logged in
+            res.json({
+                msg: "badToken",
+            })
+        } else {
+            // user logged in
+            // get the user's id for the last query
+            const uid = results[0].id;
+            const addToCartQuery = `INSERT into cart (uid, productCode)
+                VALUES (?,?);`;
+            connection.query(addToCartQuery,[uid,productCode],(error,results)=>{
+                if(error){
+                    throw error;
+                } else {
+                    // insert worked
+                    const getCartTotals = `SELECT SUM(buyPrice) AS totalPrice, count(buyPrice) AS totalItems FROM cart
+                        INNER JOIN products ON products.productCode = cart.productCode
+                        WHERE cart.uid = ?;`;
+                    connection.query(getCartTotals,[uid],(error,cartResults)=>{
+                        if(error){
+                            throw error; //dev only
+                        } else {
+                            res.json(cartResults);
+                        }
+                    })
+                }
+            });
+        }
+    })
 })
 
 module.exports = router;
