@@ -6,6 +6,7 @@ import { bindActionCreators } from 'redux';
 import Search from '../components/Search';
 // actions
 import GetProductLines from '../actions/GetProductLines';
+import LoginAction from '../actions/LoginAction'
 // react-materialize
 import { Row } from 'react-materialize'
 
@@ -26,7 +27,8 @@ class NavBar extends Component{
 
     render(){
         console.log(this.props.cart);
-        if(this.props.auth.name !== undefined){
+        console.log(this.props.auth)
+        if(this.props.auth.userName !== undefined){
             // the user is logged in
             if(this.props.cart.length > 0){
                 const totalPrice = this.props.cart[0].totalPrice;
@@ -37,6 +39,8 @@ class NavBar extends Component{
             }
             // console.log(this.props.auth);
             // user is logged in
+        }
+            if (this.props.auth.userName !== undefined) {
             var rightMenuBar = [
                 <li key={1}>Welcome, {this.props.auth.userName}</li>,
                 <li key={2}><Link to="/cart">{cartText}</Link></li>,
@@ -97,6 +101,7 @@ class NavBar extends Component{
 }
 
 function mapStateToProps(state){
+    console.log(state)
     return{
         auth:state.auth,
         pl: state.pl,
