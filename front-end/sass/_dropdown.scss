@@ -10,10 +10,13 @@ nav.nav-extended .nav-content {
     position: relative;
     .dropdown-links {
         display: none;
+        position: absolute;
+        z-index: 1000;
+        overflow: visible;
     }
     &:hover .dropdown-links {
         display: block;
-        background-color: red;
+        background-color: $drop-down-color;
     }
     a {
         display: block;

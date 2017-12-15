@@ -25,14 +25,20 @@ nav.nav-extended .nav-content {
 .dropdown {
   position: relative; }
   .dropdown .dropdown-links {
-    display: none; }
+    display: none;
+    position: absolute;
+    z-index: 1000;
+    overflow: visible; }
   .dropdown:hover .dropdown-links {
     display: block;
-    background-color: red; }
+    background-color: #81c784; }
   .dropdown a {
     display: block; }
 
 /* GENERAL RULES */
+.App {
+  overflow-x: hidden; }
+
 img {
   width: 100%; }
 

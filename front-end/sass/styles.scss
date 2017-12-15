@@ -6,7 +6,12 @@
 
 /* GENERAL RULES */
 
-body {}
+body {
+}
+
+.App{
+    overflow-x: hidden;
+}
 
 img {
     width: 100%;

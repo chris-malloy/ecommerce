@@ -104,4 +104,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(NavBar);
 
 // TODO 
 // make a redux action to log out, remove token
-// turn shop into dropdown menu
+// figure out why drop down stops too early
+// add arrow to drop down menu (shop)
+
