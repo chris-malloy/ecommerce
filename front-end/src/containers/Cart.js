@@ -2,16 +2,46 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 import GetCart from '../actions/GetCart';
 import CartRow from '../containers/CartRow';
 
 class Cart extends Component {
-    constructor() {
+    constructor(){
         super();
-        this.state = {
-            productList: [],
-        }
+        this.makePayment = this.makePayment.bind(this);
     }
+
+    makePayment() {
+        var handler = window.StripeCheckout.configure({
+            key: 'pk_test_mS519VDC3QaN4SwfrHL7y77A',
+            locale: 'auto',
+            image: '',
+            token: (token) => {
+                var theData = {
+                    amount: 10 * 100,
+                    stripeToken: token.id,
+                    userToken: this.props.tokenData,
+                }
+                axios({
+                    method: 'POST',
+                    url: `${window.apiHost}/stripe`,
+                    data: theData
+                }).done((data) => {
+                    console.log(data);
+                    if (data.msg === 'paymentSuccess') {
+
+                    }
+                });
+            }
+        });
+        handler.open({
+            name: "Pay Now",
+            description: 'Pay Now',
+            amount: this.props.cart.totalPrice * 100 // total is in pennies
+        })
+    }
+
 
     componentDidMount() {
         // console.log(this.props.auth);
@@ -59,7 +89,10 @@ class Cart extends Component {
                             </table>
                         </div>
                         <div className="col s4">
-                            <h3>Subtotal ({this.props.cart.totalItems} items) in Your Cart: ${this.props.cart.totalPrice} <button className="btn">Checkout</button></h3>
+                            <h3>
+                                Subtotal ({this.props.cart.totalItems} items) in Your Cart: ${this.props.cart.totalPrice} 
+                                <button className="btn" onClick={this.makePayment}>Checkout</button>
+                            </h3>
                         </div>
                     </div>
                 </div>
@@ -85,3 +118,8 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cart);
+
+//TODO
+// make subtotal box fixed postion?
+// add logo image to stripe pay now modal
+// look for other customizeable strip properties
