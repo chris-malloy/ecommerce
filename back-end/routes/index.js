@@ -206,6 +206,7 @@ router.post('/getCart',(req,res,next)=>{
                         } else {
                             var finalCart = cartResults[0];
                             finalCart.products = cartContents;  
+                            console.log(finalCart)
                             res.json(finalCart);
                         }
                     })

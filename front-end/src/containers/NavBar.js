@@ -34,9 +34,10 @@ class NavBar extends Component{
         // console.log(this.props.auth)
         if(this.props.auth.userName !== undefined){
             // the user is logged in
-            if(this.props.cart.length > 0){
-                const totalPrice = this.props.cart[0].totalPrice;
-                const totalItems = this.props.cart[0].totalItems;
+            console.log(this.props.cart);
+            if(this.props.cart.totalPrice !== undefined){
+                const totalPrice = this.props.cart.totalPrice;
+                const totalItems = this.props.cart.totalItems;
                 var cartText = `(${totalItems}) items in your cart | ($${totalPrice})`
             } else {
                 cartText = "Your cart is empty"
@@ -56,7 +57,7 @@ class NavBar extends Component{
             <li key={2}>|</li>,
             <li key={3}><Link to="/register">Create an Account</Link></li>,
             <li key={4}><Link to="/login">(0) items in cart | ($0.00)</Link></li>,
-            <li key={0}><button className="btn fake-btn" onClick={this.fakeLogin}>FAKE LOGIN</button></li>,
+            <li key={5}><button className="btn fake-btn" onClick={this.fakeLogin}>FAKE LOGIN</button></li>,
             ]
         }
         // console.log(this.props.auth);
