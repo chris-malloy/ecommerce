@@ -102,3 +102,6 @@ function mapDispatchToProps(dispatch){
 }
 
 export default connect(mapStateToProps,mapDispatchToProps)(ProductLines);
+
+// TODO
+// turn table into photo cards
