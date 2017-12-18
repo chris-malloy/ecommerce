@@ -1,3 +1,5 @@
+import { read } from 'fs';
+
 var express = require('express');
 var router = express.Router();
 var mysql = require('mysql');
@@ -6,6 +8,22 @@ var connection = mysql.createConnection(config);
 connection.connect();
 var bcrypt = require('bcrypt-nodejs');
 var randToken = require('rand-token');
+
+// dev login
+router.post('/fakelogin', (req, res, next) => {
+    const getFirstUser = `SELECT * from users limit 1;`;
+    connection.query(getFirstUser, (error, results) => {
+        if (error) {
+            throw error;
+        }
+        console.log(results);
+        res.json({
+            msg: "loginSuccess",
+            token: results[0].token,
+            userName: results[0].email
+        });
+    })
+});
 
 // post route for user login 
 router.post('/login', (req, res, next) => {
@@ -157,6 +175,33 @@ router.get('/productLines/:productLine/get', (req, res, next) => {
             res.json(results);
         }
     })
+})
+
+router.post('/getCart',(req,res,next)=>{
+    const userToken = req.body.token;
+    const getUidQuery = `SELECT id from users WHERE token = ?;`;
+    connection.query(getUidQuery, [userToken], (error, results) => {
+        if (error) {
+            throw error; //dev only
+        } else if (results.length === 0) {
+            // user not logged in
+            res.json({
+                msg: "badToken",
+            })
+        } else {
+            const uid = results[0].id;
+            const getCartTotals = `SELECT SUM(buyPrice) AS totalPrice, count(buyPrice) AS totalItems 
+                    FROM cart
+                    INNER JOIN products ON products.productCode = cart.productCode
+                    WHERE cart.uid = ?;`;
+            connection.query(getCartTotals, [uid], (error, cartResults) => {
+                if (error) {
+                    throw error; //dev only
+                } else {
+                    res.json(cartResults);
+                }
+            })
+        }
 })
 
 router.post('/updateCart', (req, res, next)=>{

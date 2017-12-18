@@ -35,6 +35,10 @@ nav.nav-extended .nav-content {
   .dropdown a {
     display: block; }
 
+/* DEV TOOLS */
+.fake-btn {
+  background-color: red !important; }
+
 /* GENERAL RULES */
 img {
   width: 100%; }

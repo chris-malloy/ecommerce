@@ -13,9 +13,14 @@ import { Row } from 'react-materialize'
 
 
 class NavBar extends Component{
-    // constructor(){
-    //     super();
-    // }
+    constructor(){
+        super();
+        this.fakeLogin = this.fakeLogin.bind(this);
+    }
+
+    fakeLogin(){
+        this.props.loginAction('fake');
+    }
 
     componentDidMount(){
         this.props.getProductLines();
@@ -26,7 +31,7 @@ class NavBar extends Component{
     }
 
     render(){
-        console.log(this.props.cart);
+        // console.log(this.props.cart);
         console.log(this.props.auth)
         if(this.props.auth.userName !== undefined){
             // the user is logged in
@@ -44,14 +49,15 @@ class NavBar extends Component{
             var rightMenuBar = [
                 <li key={1}>Welcome, {this.props.auth.userName}</li>,
                 <li key={2}><Link to="/cart">{cartText}</Link></li>,
-                <li key={3}><a href="/">Logout</a></li>,
+                <li key={3}><Link to="/logout">Logout</Link></li>,
             ]
         } else {
             rightMenuBar = [
             <li key={1}><Link to="/login">Sign in</Link></li>,
             <li key={2}>|</li>,
             <li key={3}><Link to="/register">Create an Account</Link></li>,
-            <li key={4}><a href="/">(0) items in cart | ($0.00)</a></li>,
+            <li key={4}><Link to="/">(0) items in cart | ($0.00)</Link></li>,
+            <li key={0}><button className="btn fake-btn" onClick={this.fakeLogin}>FAKE LOGIN</button></li>,
             ]
         }
         // console.log(this.props.auth);
@@ -73,6 +79,7 @@ class NavBar extends Component{
                                     <ul>
                                         <li className="dropdown-links">
                                             {shopMenu}
+                                            <i className="material-icons">arrow_drop_down</i>
                                         </li>
                                     </ul>
                                 </li>
@@ -112,6 +119,7 @@ function mapStateToProps(state){
 function mapDispatchToProps(dispatch){
     return bindActionCreators({
         getProductLines: GetProductLines,
+        loginAction: LoginAction,
     },dispatch)
 }
 
@@ -121,4 +129,5 @@ export default connect(mapStateToProps, mapDispatchToProps)(NavBar);
 // make a redux action to log out, remove token
 // figure out why drop down stops too early
 // add arrow to drop down menu (shop)
+// make shop menu prettier
 

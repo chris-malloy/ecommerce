@@ -7,6 +7,7 @@ import SlickSlider from './components/SlickSlider';
 import Register from './containers/Register';
 import Login from './containers/Login';
 import ProductLines from './containers/ProductLines';
+import Logout from './containers/Logout';
 
 class App extends Component {
     render() {
@@ -18,6 +19,7 @@ class App extends Component {
 					<Route exact path="/register" component={Register} />
 					<Route exact path="/login" component={Login} />
 					<Route path="/shop/:productLines" component={ProductLines} />
+					<Route exact path="/logout" component={Logout} />
 				</div>
 			</Router>
 		);
