@@ -1,5 +1,3 @@
-import { read } from 'fs';
-
 var express = require('express');
 var router = express.Router();
 var mysql = require('mysql');
@@ -202,6 +200,7 @@ router.post('/getCart',(req,res,next)=>{
                 }
             })
         }
+    })
 })
 
 router.post('/updateCart', (req, res, next)=>{

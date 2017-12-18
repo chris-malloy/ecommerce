@@ -6,7 +6,8 @@ import { bindActionCreators } from 'redux';
 import Search from '../components/Search';
 // actions
 import GetProductLines from '../actions/GetProductLines';
-import LoginAction from '../actions/LoginAction'
+import LoginAction from '../actions/LoginAction';
+import GetCart from '../actions/GetCart';
 // react-materialize
 import { Row } from 'react-materialize'
 
@@ -27,7 +28,11 @@ class NavBar extends Component{
     }
 
     componentWillReceiveProps(newProps){
-
+        console.log(newProps);
+        if(newProps.auth.msg === 'loginSuccess'){
+            // user logged in, go get their cart
+            this.props.getCart();
+        }
     }
 
     render(){
@@ -79,7 +84,6 @@ class NavBar extends Component{
                                     <ul>
                                         <li className="dropdown-links">
                                             {shopMenu}
-                                            <i className="material-icons">arrow_drop_down</i>
                                         </li>
                                     </ul>
                                 </li>
@@ -119,7 +123,9 @@ function mapStateToProps(state){
 function mapDispatchToProps(dispatch){
     return bindActionCreators({
         getProductLines: GetProductLines,
-        loginAction: LoginAction,
+        getCart: GetCart,
+        // dev only 
+        loginAction: LoginAction
     },dispatch)
 }
 

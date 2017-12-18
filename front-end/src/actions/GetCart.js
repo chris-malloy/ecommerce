@@ -7,5 +7,10 @@ export default function(token){
         data:{
             token: token,
         }
-    })
+    });
+
+    return{
+        type: "GET_CART",
+        payload: axiosPromise
+    }
 }
