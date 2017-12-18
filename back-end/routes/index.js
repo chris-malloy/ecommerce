@@ -267,9 +267,90 @@ router.post('/stripe',(req,res,next)=>{
         amount: amount,
         currency: 'usd',
         source: stripeToken,
-        description: "Charges fro classicmodels"
+        description: "Charges for classicmodels"
     },
     (error,charge)=>{
+        if (error) {
+            res.json({
+                msg: error
+            })
+        } else {
+            // Insert stuff from cart that was just paid into:
+            // - orders
+            const getUserQuery = `SELECT users.id, users.uid,cart.productCode,products.buyPrice, COUNT(cart.productCode) as quantity FROM users 
+				INNER JOIN cart ON users.id = cart.uid
+				INNER JOIN products ON cart.productCode = products.productCode
+			WHERE token = ?
+			GROUP BY cart.productCode`
+            console.log(userToken)
+            console.log(getUserQuery);
+            connection.query(getUserQuery, [userToken], (error2, results2) => {
+                console.log("==========================")
+                console.log(results2)
+                console.log("==========================")
+                const customerId = results2[0].uid;
+                const insertIntoOrders = `INSERT INTO orders
+					(orderDate,requiredDate,comments,status,customerNumber)
+					VALUES
+					(?,?,'Website Order','Paid',?)`
+                connection.query(insertIntoOrders, [Date.now(), Date.now(), customerId], (error3, results3) => {
+                    console.log(results3)
+                    const newOrderNumber = results3.insertId;
+                    // results2 (the select query above) contains an array of rows. 
+                    // Each row has the uid, the productCOde, and the price
+                    // map through this array, and add each one to the orderdetails tabl
+
+                    // Set up an array to stash our promises inside of
+                    // After all the promises have been created, we wil run .all on this thing
+                    var orderDetailPromises = [];
+                    // Loop through all the rows in results2, which is...
+                    // a row for every element in the users cart.
+                    // Each row contains: uid, productCode,BuyPrice
+                    // Call the one we're on, "cartRow"
+                    results2.map((cartRow) => {
+                        // Set up an insert query to add THIS product to the orderdetails table
+                        var insertOrderDetail = `INSERT INTO orderdetails
+								(orderNumber,productCode,quantityOrdered,priceEach,orderLineNumber)
+								VALUES
+								(?,?,?,?,1)`
+                        // Wrap a promise around our query (because queries are async)
+                        // We will call resolve if it succeeds, call reject if it fails
+                        // Then, push the promise onto the array above
+                        // So that when all of them are finished, we know it's safe to move forward
+
+                        const aPromise = new Promise((resolve, reject) => {
+                            connection.query(insertOrderDetail, [newOrderNumber, cartRow.productCode, cartRow.quantity, cartRow.buyPrice], (error4, results4) => {
+                                // another row finished.
+                                if (error4) {
+                                    reject(error4)
+                                } else {
+                                    resolve(results4)
+                                }
+                            })
+                        })
+                        orderDetailPromises.push(aPromise);
+                    })
+                    // When ALL the promises in orderDetailPromises have called resolve...
+                    // the .all function will run. It has a .then that we can use
+                    Promise.all(orderDetailPromises).then((finalValues) => {
+                        console.log("All promises finished")
+                        console.log(finalValues)
+                        const deleteQuery = `
+                            DELETE FROM cart WHERE uid = ${results2[0].id}
+                        `
+                        connection.query(deleteQuery, (error5, results5) => {
+                            // - orderdetails
+                            // Then remove it from cart
+                            res.json({
+                                msg: 'paymentSuccess'
+                            })
+                        })
+                    });
+
+                })
+            });
+
+        }
 
     });
 })

@@ -27,10 +27,12 @@ class Cart extends Component {
                     method: 'POST',
                     url: `${window.apiHost}/stripe`,
                     data: theData
-                }).then((data) => {
-                    console.log(data);
-                    if (data.msg === 'paymentSuccess') {
-
+                }).then((response) => {
+                    console.log(response);
+                    if (response.data.msg === 'paymentSuccess') {
+                        this.props.history.push('/postcheckout')
+                    } else {
+                        console.log(response.data.msg)
                     }
                 });
             }

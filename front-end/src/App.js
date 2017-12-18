@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 // components
 import NavBar from './containers/NavBar';
-import SlickSlider from './components/SlickSlider';
+import SlickSlider from './containers/SlickSlider';
 // containers
 import Register from './containers/Register';
 import Login from './containers/Login';
