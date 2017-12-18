@@ -7,7 +7,7 @@ import LogoutAction from '../actions/LogoutAction';
 class Logout extends Component {
 
     componentDidMount(){
-        console.log(this.props.match);
+        // console.log(this.props.match);
         this.props.logoutAction();
         this.props.history.push('/');
     }

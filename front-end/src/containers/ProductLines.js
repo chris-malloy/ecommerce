@@ -66,7 +66,7 @@ class ProductLines extends Component{
                 <h1>Welcome to the {this.props.match.params.productLines} page.</h1>
                 <p>{desc}</p>
                 <div className="products">
-                    <table className="bordered highlight striped responsive-table">
+                    <table className="bordered striped responsive-table">
                         <thead>
                             <tr>
                                 <th>Product Name</th>

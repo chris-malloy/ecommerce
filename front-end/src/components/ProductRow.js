@@ -7,7 +7,7 @@ function ProductRow(props){
         var button = "";
     } else {
         button = <button
-                    className="btn"
+                className="btn waves-effect waves-light"
                     onClick={()=>{
                         props.addToCart(props.token,product.productCode)
                     }}

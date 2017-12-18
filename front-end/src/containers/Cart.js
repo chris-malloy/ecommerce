@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { Link } from 'react-router-dom';
 import GetCart from '../actions/GetCart';
 
 class Cart extends Component {
@@ -12,7 +13,7 @@ class Cart extends Component {
     }
 
     componentDidMount() {
-        console.log(this.props.auth);
+        // console.log(this.props.auth);
         if(this.props.auth.token === undefined){
             // user has no token, do't give them access
             //this.props.history.push('/login');
@@ -22,16 +23,31 @@ class Cart extends Component {
         }
     }
 
-    componentWillReceiveProps(nextProps) {
-    }
-
     render() {
-        console.log(this.props.cart);
-        return(
-            <div className="container">
-                <h1>Cart Page</h1>
-            </div>
-        )
+        // console.log(this.props.cart);
+        if(this.props.cart.totalItems === 0 || this.props.cart.length === 0){
+            return(
+                <div>
+                    <h3>Your cart is empty. Get shopping or <Link to="/login">login</Link>.</h3>
+                </div>
+            )
+        } else {
+            console.log(this.props.cart)
+            var cartArray = this.props.cart.products.map((product,index)=>{
+                console.log(product);
+                return(
+                    <h3 key={index}>{product.productName}</h3>
+                )
+            })
+            return (
+
+                <div className="container center">
+                    <h1>Cart Page</h1>
+                    {cartArray}
+                </div>
+            )
+        }
+
     }
      
 }

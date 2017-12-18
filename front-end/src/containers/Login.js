@@ -52,7 +52,7 @@ class Login extends Component {
         }
     }
     render() {
-        console.log(this.props.auth);   
+        // console.log(this.props.auth);   
         return (
             <div className="container" id="login">
                 <form onSubmit={this.handleSubmit}>
@@ -60,7 +60,7 @@ class Login extends Component {
                         <h3>Login</h3>
                         <Input s={12} type="email" label={this.state.msgEmail} />
                         <Input s={12} type="password" label={this.state.msgPassword} />
-                        <Button s={12} className="btn">Login</Button>
+                        <Button s={12} className="btn" waves="light">Login</Button>
                         <p><a href="/register">Don't have an account? Click here.</a></p>
                     </Row>
                 </form>

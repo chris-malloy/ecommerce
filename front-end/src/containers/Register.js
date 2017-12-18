@@ -127,7 +127,7 @@ class Register extends Component {
                         <Input s={12} type="password" label="* password" />
                         <p>* field required</p>
                         <Input s={12} name='group1' type='checkbox' value='green' label='Sign up for our email list!' defaultChecked='checked' className="primary-color" /> 
-                        <Button s={12} className="btn">Register</Button>
+                        <Button s={12} className="btn" waves="light">Register</Button>
                         <p><a href="/login">Already have an account? Click here.</a></p>               
                     </Row>
                 </form>

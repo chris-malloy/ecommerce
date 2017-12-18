@@ -20,6 +20,7 @@ class NavBar extends Component{
 
     fakeLogin(){
         this.props.loginAction('fake');
+        this.props.getProductLines();
     }
 
     componentDidMount(){
@@ -34,7 +35,6 @@ class NavBar extends Component{
         // console.log(this.props.auth)
         if(this.props.auth.userName !== undefined){
             // the user is logged in
-            console.log(this.props.cart);
             if(this.props.cart.totalPrice !== undefined){
                 const totalPrice = this.props.cart.totalPrice;
                 const totalItems = this.props.cart.totalItems;
@@ -56,7 +56,7 @@ class NavBar extends Component{
             <li key={1}><Link to="/login">Sign in</Link></li>,
             <li key={2}>|</li>,
             <li key={3}><Link to="/register">Create an Account</Link></li>,
-            <li key={4}><Link to="/login">(0) items in cart | ($0.00)</Link></li>,
+            <li key={4}><Link to="/cart">(0) items in cart | ($0.00)</Link></li>,
             <li key={5}><button className="btn fake-btn" onClick={this.fakeLogin}>FAKE LOGIN</button></li>,
             ]
         }
