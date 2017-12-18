@@ -7,7 +7,6 @@ import Search from '../components/Search';
 // actions
 import GetProductLines from '../actions/GetProductLines';
 import LoginAction from '../actions/LoginAction';
-import GetCart from '../actions/GetCart';
 // react-materialize
 import { Row } from 'react-materialize'
 
@@ -32,7 +31,7 @@ class NavBar extends Component{
 
     render(){
         // console.log(this.props.cart);
-        console.log(this.props.auth)
+        // console.log(this.props.auth)
         if(this.props.auth.userName !== undefined){
             // the user is logged in
             if(this.props.cart.length > 0){
@@ -56,7 +55,7 @@ class NavBar extends Component{
             <li key={1}><Link to="/login">Sign in</Link></li>,
             <li key={2}>|</li>,
             <li key={3}><Link to="/register">Create an Account</Link></li>,
-            <li key={4}><Link to="/">(0) items in cart | ($0.00)</Link></li>,
+            <li key={4}><Link to="/login">(0) items in cart | ($0.00)</Link></li>,
             <li key={0}><button className="btn fake-btn" onClick={this.fakeLogin}>FAKE LOGIN</button></li>,
             ]
         }
@@ -107,7 +106,7 @@ class NavBar extends Component{
 }
 
 function mapStateToProps(state){
-    console.log(state)
+    // console.log(state)
     return{
         auth:state.auth,
         pl: state.pl,

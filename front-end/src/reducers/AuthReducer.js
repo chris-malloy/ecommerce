@@ -3,10 +3,8 @@ export default function( state = [], action){
         case 'AUTH_ACTION':
             console.log(action.payload);
             return action.payload.data;
-            break;
         case 'LOGOUT':
             return [];
-            break;
         default:
             return state;
     }

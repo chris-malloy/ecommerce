@@ -3,7 +3,6 @@ export default function (state = [], action) {
         case 'UPDATE_CART':
         case 'GET_CART':
             return action.payload.data;
-            break;
         default:
             return state;
     }

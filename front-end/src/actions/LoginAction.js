@@ -11,7 +11,7 @@ export default function(formData){
         })
     } else {
         // console.log("Login action running.")
-        var loginPromise = axios({
+        loginPromise = axios({
             method: "POST",
             url: `${window.apiHost}/login`,
             data: formData,
