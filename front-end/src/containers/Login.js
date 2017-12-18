@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 // custom components 
 import LoginAction from '../actions/LoginAction'
+import GetCart from '../actions/GetCart';
 // react-materialize
 import {Row, Input, Button} from 'react-materialize';
 
@@ -26,6 +27,7 @@ class Login extends Component {
                 error: "Email not found.",
             })
         } else if(newProps.auth.msg === "loginSuccess"){
+            this.props.getCart(newProps.auth.token);
             newProps.history.push('/')
         }
     }
@@ -76,6 +78,7 @@ function mapStateToProps(state){
 function mapDispatchToProps(dispatch){
     return bindActionCreators({
         loginAction: LoginAction,
+        getCart: GetCart,
     }, dispatch)
 }
 

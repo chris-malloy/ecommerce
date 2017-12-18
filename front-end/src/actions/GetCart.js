@@ -8,7 +8,6 @@ export default function(token){
             token: token,
         }
     });
-
     return{
         type: "GET_CART",
         payload: axiosPromise

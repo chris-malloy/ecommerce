@@ -28,11 +28,6 @@ class NavBar extends Component{
     }
 
     componentWillReceiveProps(newProps){
-        console.log(newProps);
-        if(newProps.auth.msg === 'loginSuccess'){
-            // user logged in, go get their cart
-            this.props.getCart();
-        }
     }
 
     render(){
@@ -123,7 +118,6 @@ function mapStateToProps(state){
 function mapDispatchToProps(dispatch){
     return bindActionCreators({
         getProductLines: GetProductLines,
-        getCart: GetCart,
         // dev only 
         loginAction: LoginAction
     },dispatch)
