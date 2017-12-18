@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Link } from 'react-router-dom';
 import GetCart from '../actions/GetCart';
+import CartRow from '../containers/CartRow';
 
 class Cart extends Component {
     constructor() {
@@ -27,7 +28,7 @@ class Cart extends Component {
         // console.log(this.props.cart);
         if(this.props.cart.totalItems === 0 || this.props.cart.length === 0){
             return(
-                <div>
+                <div className="container center">
                     <h3>Your cart is empty. Get shopping or <Link to="/login">login</Link>.</h3>
                 </div>
             )
@@ -36,15 +37,33 @@ class Cart extends Component {
             var cartArray = this.props.cart.products.map((product,index)=>{
                 console.log(product);
                 return(
-                    <h3 key={index}>{product.productName}</h3>
+                    <CartRow key={index} product={product} />
                 )
             })
             return (
-
                 <div className="container center">
-                    <h1>Cart Page</h1>
-                    {cartArray}
+                    <div className="row">
+                        <div className="col s8">
+                            <table className="bordered striped responsive-table">
+                                <thead>
+                                    <tr>
+                                        <th>Product</th>
+                                        <th>Price</th>
+                                        <th>Remove</th>
+                                        <th>Save</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {cartArray}
+                                </tbody>
+                            </table>
+                        </div>
+                        <div className="col s4">
+                            <h3>Subtotal ({this.props.cart.totalItems} items) in Your Cart: ${this.props.cart.totalPrice} <button className="btn">Checkout</button></h3>
+                        </div>
+                    </div>
                 </div>
+                
             )
         }
 

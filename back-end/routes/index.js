@@ -217,7 +217,7 @@ router.post('/getCart',(req,res,next)=>{
 })
 
 router.post('/updateCart', (req, res, next)=>{
-    console.log("update cart hit")
+    // console.log("update cart hit")
     const productCode = req.body.productCode;
     const userToken = req.body.userToken;
     const getUidQuery = `SELECT id from users WHERE token = ?;`;
@@ -247,7 +247,9 @@ router.post('/updateCart', (req, res, next)=>{
                         if(error){
                             throw error; //dev only
                         } else {
-                            res.json(cartResults[0]);
+                            var finalCart = cartResults[0];
+                            finalCart.products = []
+                            res.json(finalCart);
                         }
                     })
                 }
