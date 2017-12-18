@@ -19,15 +19,15 @@ class Cart extends Component {
             image: '',
             token: (token) => {
                 var theData = {
-                    amount: 10 * 100,
+                    amount: this.props.cart.totalPrice * 100,
                     stripeToken: token.id,
-                    userToken: this.props.tokenData,
+                    userToken: this.props.auth.token,
                 }
                 axios({
                     method: 'POST',
                     url: `${window.apiHost}/stripe`,
                     data: theData
-                }).done((data) => {
+                }).then((data) => {
                     console.log(data);
                     if (data.msg === 'paymentSuccess') {
 

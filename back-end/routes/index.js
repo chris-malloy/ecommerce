@@ -2,7 +2,8 @@ var express = require('express');
 var router = express.Router();
 var mysql = require('mysql');
 var config = require('../config/config');
-var connection = mysql.createConnection(config);
+var stripe = require('stripe')(config.stripeKey);
+var connection = mysql.createConnection(config.db);
 connection.connect();
 var bcrypt = require('bcrypt-nodejs');
 var randToken = require('rand-token');
@@ -256,6 +257,21 @@ router.post('/updateCart', (req, res, next)=>{
             });
         }
     })
+})
+
+router.post('/stripe',(req,res,next)=>{
+    const userToken = req.body.userToken;
+    const stripeToken = req.body.stripeToken;
+    const amount = req.body.amount;
+    stripe.charges.create({
+        amount: amount,
+        currency: 'usd',
+        source: stripeToken,
+        description: "Charges fro classicmodels"
+    },
+    (error,charge)=>{
+
+    });
 })
 
 module.exports = router;
