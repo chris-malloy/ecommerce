@@ -247,7 +247,7 @@ router.post('/updateCart', (req, res, next)=>{
                         if(error){
                             throw error; //dev only
                         } else {
-                            res.json(cartResults);
+                            res.json(cartResults[0]);
                         }
                     })
                 }
