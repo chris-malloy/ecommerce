@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import {connect} from 'react-redux';
 import { bindActionCreators } from 'redux';
 // components
-import Search from '../components/Search';
+import Search from '../containers/Search';
 // actions
 import GetProductLines from '../actions/GetProductLines';
 import LoginAction from '../actions/LoginAction';
@@ -16,11 +16,18 @@ class NavBar extends Component{
     constructor(){
         super();
         this.fakeLogin = this.fakeLogin.bind(this);
+        this.updateInput = this.updateInput.bind(this);
     }
 
     fakeLogin(){
         this.props.loginAction('fake');
         this.props.getProductLines();
+    }
+    
+    updateInput(value) {
+        this.setState({
+            inputValue: value
+        })
     }
 
     componentDidMount(){
@@ -86,7 +93,7 @@ class NavBar extends Component{
                                 <li><Link to="/">Contact Us</Link></li>
                             </ul>
                             <div className="right">
-                                <Search />
+                                <Search updateInput={this.updateInput} />
                             </div>
                         </div>
                     </nav>

@@ -164,6 +164,7 @@ router.get('/productLines/get', (req, res, next) => {
 
 router.get('/productLines/:productLine/get', (req, res, next) => {
     const pl = req.params.productLine
+    console.log(pl)
     var plQuery = `SELECT * FROM productlines
         INNER JOIN products ON productlines.productLine = products.productLine
 		WHERE productlines.productline = ?;`;

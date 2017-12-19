@@ -5,8 +5,6 @@ import axios from 'axios';
 import ProductRow from '../components/ProductRow';
 import UpdateCart from '../actions/UpdateCart';
 
-
-
 class ProductLines extends Component{
     constructor(){
         super();
@@ -17,7 +15,8 @@ class ProductLines extends Component{
     }
 
     getProducts(props){
-        const pl = this.props.match.params.productLines
+        const pl = props.match.params.productLines
+        console.log(pl)
         const url = `${window.apiHost}/productLines/${pl}/get`;
         // console.log(url);
         axios.get(url)
@@ -36,7 +35,7 @@ class ProductLines extends Component{
         this.getProducts(nextProps);
     }
 
-    render(props){
+    render(){
         // console.log(this.props);
         // console.log(this.props.pl)
         // console.log(this.state.productList);
@@ -63,7 +62,7 @@ class ProductLines extends Component{
         // console.log(thisPL[0])
         return(
             <div className="container">
-                <h1>Welcome to the {this.props.match.params.productLines} page.</h1>
+                <div className="center"><h2>Welcome to the {this.props.match.params.productLines} page.</h2></div>
                 <p>{desc}</p>
                 <div className="products">
                     <table className="bordered striped responsive-table">

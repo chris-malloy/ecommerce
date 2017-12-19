@@ -2,6 +2,18 @@ import React, { Component } from 'react';
 // materialize components
 
 class Search extends Component{
+    constructor() {
+        super();
+
+        this.handleInput = this.handleInput.bind(this)
+    }
+
+    handleInput(event) {
+        var inputValue = event.target.value;
+        console.log(inputValue)
+        this.props.updateInput(inputValue);
+    }
+
     render(){
         return(
             <div id="search" className="row">
@@ -9,7 +21,7 @@ class Search extends Component{
                     <div className="row">
                         <div className="input-field col s12">
                             <i className="material-icons prefix green-text text-darken-1">search</i>
-                            <input type="text" className="validate" id="icon_prefix" /> 
+                            <input onChange={this.handleInput} type="text" className="validate" id="icon_prefix" /> 
                             <label htmlFor="icon_prefix">Search</label>
                         </div>
                     </div>
