@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+
 // components
 import NavBar from './containers/NavBar';
 import SlickSlider from './containers/SlickSlider';
