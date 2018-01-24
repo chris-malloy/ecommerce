@@ -16,7 +16,7 @@ export default function(formData){
             url: `${window.apiHost}/login`,
             data: formData,
         })
-    }
+    } 
 
     return{
         type: "AUTH_ACTION",

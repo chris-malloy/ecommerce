@@ -89,7 +89,7 @@ class ProductLines extends Component{
 
 function mapStateToProps(state){
     return{
-        pl:state.pl,
+        pl: state.pl,
         auth: state.auth
     }
 }

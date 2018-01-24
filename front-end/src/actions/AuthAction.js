@@ -1,5 +1,5 @@
 // action is a js function that returns an object
-// that object must ahvea t least a prop of "type"
+// that object must have at least a prop of "type"
 
 import axios from 'axios';
 
